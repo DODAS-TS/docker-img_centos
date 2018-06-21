@@ -1,4 +1,4 @@
-FROM cloudpg/centos-7-grid-tini
+FROM dodasts/centos-7-grid-tini
 
 RUN yum --setopt=tsflags=nodocs -y update \
     && yum --setopt=tsflags=nodocs -y install openssh-server sudo \

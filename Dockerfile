@@ -30,30 +30,7 @@ RUN TINI_VERSION="v0.13.2" \
     && mv "${TINI_BUILD}/tini_${TINI_REAL_VERSION}.rpm" "/tmp/tini.rpm"
 
 # Final Stage
-FROM centos:7
-LABEL maintainer="mirco.tracolli@pg.infn.it"
-LABEL Version=1.0
-
-# Reference for EL7 Worker Node
-# wn metapackage: https://twiki.cern.ch/twiki/bin/view/LCG/EL7WNMiddleware 
-
-# Update system and install wget
-RUN echo "LC_ALL=C" >> /etc/environment \
-    && echo "LANGUAGE=C" >> /etc/environment \
-    && yum --setopt=tsflags=nodocs -y update \
-    && yum --setopt=tsflags=nodocs -y install wget \
-    && yum clean all
-
-# Add yum repos
-WORKDIR /etc/yum.repos.d
-RUN wget http://repository.egi.eu/community/software/preview.repository/2.0/releases/repofiles/centos-7-x86_64.repo \
-    && wget http://repository.egi.eu/sw/production/cas/1/current/repo-files/EGI-trustanchors.repo 
-
-# Add grid stuff
-WORKDIR /root
-RUN yum --setopt=tsflags=nodocs -y install epel-release yum-plugin-ovl \
-    && yum --setopt=tsflags=nodocs -y install fetch-crl wn \
-    && yum clean all
+FROM dodasts/centos-7-grid
 
 # Add tini from previous build stage
 COPY --from=TiniBuilder /tmp/tini.rpm /tmp

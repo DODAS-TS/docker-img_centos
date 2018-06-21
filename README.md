@@ -1,3 +1,3 @@
-# CentOS 7 Grid Tini Sshd
+# Docker image - CentOS
+Base CentOS images for several services used in cloud projects. It has a GRID environment.
 
-Base CentOS image for several services used in cloud projects. It has a GRID environment, tini and the ssh server.

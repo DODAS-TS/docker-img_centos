@@ -1,8 +1,8 @@
 # Stage to build tini
 # Reference: https://github.com/krallin/tini-images/blob/master/autogen/centos-7/Dockerfile
 FROM centos:7 as TiniBuilder
-RUN TINI_VERSION="v0.13.2" \
-    && TINI_REAL_VERSION="0.13.2" \
+RUN TINI_VERSION="v0.18.0" \
+    && TINI_REAL_VERSION="0.18.0" \
     && TINI_BUILD="/tmp/tini" \
     && echo "Installing build dependencies" \
     && TINI_DEPS="gcc cmake make git rpm-build glibc-static curl tar libcap-devel python-devel" \
@@ -22,7 +22,7 @@ RUN TINI_VERSION="v0.13.2" \
     && echo  "#/bin/sh" > "${HARDENING_CHECK_PLACEHOLDER}" \
     && chmod +x "${HARDENING_CHECK_PLACEHOLDER}" \
     && export PATH="${PATH}:${HARDENING_CHECK_PLACEHOLDER_DIR}" \
-    && git checkout "${TINI_VERSION}" \
+    && git checkout tags/"${TINI_VERSION}" \
     && export SOURCE_DIR="${TINI_BUILD}" \
     && export BUILD_DIR="${TINI_BUILD}" \
     && export ARCH_NATIVE=1 \

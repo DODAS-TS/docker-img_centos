@@ -1,5 +1,5 @@
 # Final Stage
-FROM dodasts/centos-7-grid
+FROM dodasts/centos:7-grid
 
 RUN TINI_VERSION="v0.18.0" \
     && if [ `uname -i` == "x86_64" ]; then PLATFORM="-amd64"; else PLATFORM=""; fi \
